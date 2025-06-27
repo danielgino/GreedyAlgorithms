@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 public class Question2 {
 
-
     public static void main(String[] args) {
         String[] words = {"The", "Daniel", "Sharon", "Fox", "Parking", "Game", "Greedy", "Lazy"};
         int L = 10;
@@ -29,7 +28,7 @@ public class Question2 {
             for (int j = i; j < n; j++) {
                 lineLength += lengths[j] + 1;
                 if (lineLength > L) break;
-                int penalty = (j == n - 1) ? 0 : L - lineLength;
+                int penalty = L - lineLength;
                 if (dp[j + 1] + penalty < dp[i]) {
                     dp[i] = dp[j + 1] + penalty;
                     breaks[i] = j + 1;
@@ -46,7 +45,7 @@ public class Question2 {
                 if (k < j - 1) line.append(" ");
             }
             int lineLength = line.length();
-            int penalty = (j == n) ? 0 : L - lineLength;
+            int penalty = L - lineLength;
             System.out.println(line + " | penalty: " + penalty);
             i = j;
         }
@@ -62,6 +61,8 @@ public class Question2 {
         for (int i = 0; i < words.length; ) {
             currentLineLength = 0;
             StringBuilder line = new StringBuilder();
+            int lineStart = i;
+
             while (i < words.length && (currentLineLength + words[i].length() + (line.length() > 0 ? 1 : 0)) <= L) {
                 if (line.length() > 0) {
                     line.append(" ");
@@ -80,5 +81,4 @@ public class Question2 {
 
         System.out.println("Total penalty: " + totalPenalty);
     }
-
 }
