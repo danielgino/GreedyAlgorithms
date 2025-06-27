@@ -78,4 +78,79 @@ Dynamic Planning:
 The Sum Of Coins: 12
 
 ```
+# Question 2
+
+
+#  Line Breaking Problem – Greedy vs. Dynamic Programming
+
+##  Problem Description
+
+Given a sequence of words, the goal is to break them into lines of **maximum length `L`**, while minimizing the **penalty**.
+
+Each line may contain one or more words, separated by single spaces.
+
+---
+
+## Constraints
+
+- Words must remain in their **original order**.
+- No line may exceed length `L` (including spaces between words).
+- The **length of a line** is the total number of characters (including spaces).
+- The **penalty** for a line of length `K` is defined as `L - K`.
+- **Every line, including the last**, contributes to the total penalty.
+
+---
+
+##  Greedy Algorithm
+
+The greedy approach adds as many words as possible to the current line.
+Once adding a word would exceed `L`, a new line is started.
+
+---
+
+## Dynamic Programming Algorithm
+
+The dynamic approach examines **all possible line breaks**, calculating the minimal penalty using bottom-up dynamic programming.
+
+### Idea:
+- Let `dp[i]` represent the minimal penalty to arrange words `i..n-1`.
+- Try placing words `i` to `j` on the current line (as long as it fits).
+- Compute `penalty = L - lineLength`, and minimize `dp[i] = dp[j+1] + penalty`.
+
+### Complexity:
+- Time: `O(n^2)` in the worst case.
+- Space: `O(n)`
+
+---
+
+# 📊 Example Run
+
+## Input:
+```
+String[] words = {"The", "Daniel", "Sharon", "Fox", "Parking", "Game", "Greedy", "Lazy"};
+int L = 10;
+
+```
+
+## Output
+
+```
+Greedy Solution:
+The Daniel | penalty: 0
+Sharon Fox | penalty: 0
+Parking | penalty: 3
+Game | penalty: 6
+Greedy | penalty: 4
+Lazy | penalty: 6
+Total penalty: 19
+=========================
+Dynamic Programming:
+The Daniel | penalty: 0
+Sharon Fox | penalty: 0
+Parking | penalty: 3
+Game | penalty: 6
+Greedy | penalty: 4
+Lazy | penalty: 6
+Total penalty: 19
+```
 
